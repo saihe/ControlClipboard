@@ -20,9 +20,24 @@ namespace WPF
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		ControlClipboardListener viewer;
+
 		public MainWindow()
 		{
+			viewer = new ControlClipboardListener(this);
+			viewer.ClipboardHandler += this.OnClipBoardChanged;
 			InitializeComponent();
 		}
+
+		private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+		}
+
+		private void OnClipBoardChanged(object sender, ControlClipboardArgs args)
+		{
+			Console.WriteLine(args.Text);
+		}
+
 	}
 }
